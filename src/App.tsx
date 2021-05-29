@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Grommet, Text, TextInput } from "grommet";
-import "./App.css";
 import Track from "./components/Track";
 import Header from "./components/Header";
 import TrackType from "./types/Track";
+import "./App.css";
+
+const theme = {
+  global: {
+    colors: { brand: "#1DB954" },
+    font: {
+      family: "Roboto",
+      size: "18px",
+      height: "20px",
+    },
+  },
+};
 
 function App() {
   const [token, setToken] = useState("");
@@ -38,7 +49,7 @@ function App() {
   };
 
   return (
-    <Grommet>
+    <Grommet theme={theme}>
       <Header />
       <div style={{ padding: 30, maxWidth: 1100, margin: "auto" }}>
         <form onSubmit={handleSubmit}>
