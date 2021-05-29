@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grommet, Text, TextInput } from "grommet";
-import Track from "./components/Track";
+import TrackGrid from "./components/TrackGrid";
 import Header from "./components/Header";
 import TrackType from "./types/Track";
 import "./App.css";
@@ -51,8 +51,17 @@ function App() {
   return (
     <Grommet theme={theme}>
       <Header />
-      <div style={{ padding: 30, maxWidth: 1100, margin: "auto" }}>
-        <form onSubmit={handleSubmit}>
+      <div
+        style={{
+          padding: 30,
+          maxWidth: 1100,
+          margin: "auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
           <TextInput
             placeholder="Song Name"
             value={searchTerm}
@@ -75,13 +84,7 @@ const Tracks = ({ tracks }: TracksProps) => {
 
   if (tracks.length === 0) return <Text>No tracks match that term!</Text>;
 
-  return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
-      {tracks.map((track) => (
-        <Track track={track} />
-      ))}
-    </div>
-  );
+  return <TrackGrid tracks={tracks} />;
 };
 
 export default App;

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Button } from "grommet";
 import TrackType from "../types/Track";
 
 interface TrackProps {
@@ -5,9 +7,20 @@ interface TrackProps {
 }
 
 export default function Track({ track }: TrackProps) {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(true);
+  };
+
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: 10,
+      }}
     >
       <img
         src={track.album.images[0].url}
@@ -18,6 +31,11 @@ export default function Track({ track }: TrackProps) {
       <p>
         {track.name} &bull; {track.artists[0].name}
       </p>
+      <Button
+        label={clicked ? <>&#10003;</> : "Add"}
+        primary
+        onClick={handleClick}
+      />
     </div>
   );
 }
