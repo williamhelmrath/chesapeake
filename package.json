@@ -50,7 +50,6 @@
     ]
   },
   "devDependencies": {
-    "@types/base-64": "^1.0.0",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
     "@types/isomorphic-fetch": "^0.0.35",
