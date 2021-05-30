@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Box, Text, ResponsiveContext } from "grommet";
+import { ResponsiveContext } from "grommet";
 import Track from "./Track";
 import TrackType from "../types/Track";
 
@@ -17,7 +17,7 @@ const DesktopContent = ({ tracks }: TracksProps) => (
     }}
   >
     {tracks.map((track) => (
-      <Track track={track} />
+      <Track track={track} key={track.id} />
     ))}
   </div>
 );
@@ -31,7 +31,7 @@ const MobileContent = ({ tracks }: TracksProps) => (
     }}
   >
     {tracks.map((track: TrackType) => (
-      <Track track={track} />
+      <Track track={track} key={track.id} />
     ))}
   </div>
 );

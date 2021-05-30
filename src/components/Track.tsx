@@ -20,6 +20,7 @@ export default function Track({ track }: TrackProps) {
         flexDirection: "column",
         alignItems: "center",
         margin: 10,
+        textAlign: "center",
       }}
     >
       <img
@@ -34,6 +35,7 @@ export default function Track({ track }: TrackProps) {
       <Button
         label={clicked ? <>&#10003;</> : "Add"}
         primary
+        disabled={clicked}
         onClick={handleClick}
       />
     </div>

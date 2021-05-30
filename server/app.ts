@@ -77,11 +77,12 @@ app.get(
     res.send(access_token);
   }
 );
-
-app.use(express.static(path.join(__dirname, "../build")));
-app.get("*", (req: express.Request, res: express.Response) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
+if (process.env.PRODUCTION) {
+  app.use(express.static(path.join(__dirname, "../build")));
+  app.get("*", (req: express.Request, res: express.Response) => {
+    res.sendFile(path.join(__dirname, "../build/index.html"));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);

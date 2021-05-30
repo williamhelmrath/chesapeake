@@ -3,6 +3,7 @@ interface Track {
   artists: Artist[];
   explicit: true;
   album: Album;
+  id: string;
 }
 
 interface Artist {

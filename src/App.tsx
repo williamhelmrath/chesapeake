@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Grommet, Text, TextInput } from "grommet";
+import { useState, useEffect } from "react";
+import { Grommet, Text } from "grommet";
 import TrackGrid from "./components/TrackGrid";
 import Header from "./components/Header";
+import SearchBar from "./components/SearchBar";
 import TrackType from "./types/Track";
 import "./App.css";
 
@@ -17,36 +18,15 @@ const theme = {
 };
 
 function App() {
-  const [token, setToken] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [tracks, setTracks] = useState(null);
+  const [token, setToken] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [tracks, setTracks] = useState<TrackType[] | null>(null);
 
   useEffect(() => {
     fetch("/authenticate")
       .then((res) => res.text())
       .then((res) => setToken(res));
   }, []);
-
-  const handleSubmit = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    if (searchTerm === "") {
-      return;
-    }
-
-    let res = await fetch(
-      `https://api.spotify.com/v1/search?q=${searchTerm}&type=track`,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    ).then((res) => res.json());
-    // res = await res.json();
-
-    setTracks(res.tracks.items);
-  };
 
   return (
     <Grommet theme={theme}>
@@ -61,14 +41,12 @@ function App() {
           alignItems: "center",
         }}
       >
-        <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
-          <TextInput
-            placeholder="Song Name"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ maxWidth: 300 }}
-          />
-        </form>
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          token={token}
+          setTracks={setTracks}
+        />
         <Tracks tracks={tracks} />
       </div>
     </Grommet>
@@ -80,7 +58,7 @@ interface TracksProps {
 }
 
 const Tracks = ({ tracks }: TracksProps) => {
-  if (!tracks) return null;
+  if (!tracks) return <Text>Your tracks will appear here!</Text>;
 
   if (tracks.length === 0) return <Text>No tracks match that term!</Text>;
 
