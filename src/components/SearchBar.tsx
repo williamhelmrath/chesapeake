@@ -44,14 +44,15 @@ export default function SearchBar({
   };
 
   return (
-    <TextInput
-      ref={inputEl}
-      placeholder="Song Name"
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      onKeyDown={handleKeyDown}
-      onBlur={handleSubmit}
-      style={{ maxWidth: 300, marginBottom: 20 }}
-    />
+    <div style={{ minWidth: 300, marginBottom: 20 }}>
+      <TextInput
+        ref={inputEl}
+        placeholder="Song Name"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={handleKeyDown}
+        onBlur={handleSubmit}
+      />
+    </div>
   );
 }
