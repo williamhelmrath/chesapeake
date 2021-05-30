@@ -11,7 +11,7 @@ require("dotenv").config();
 // const redirect_uri = process.env.REDIRECT_URI;
 const encoded_auth = process.env.ENCODED_AUTH;
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const app: express.Application = express();
 
 app.use(express.json());
