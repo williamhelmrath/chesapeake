@@ -1,13 +1,14 @@
 import express from "express";
 import cors from "cors";
-import querystring from "query-string";
+// import querystring from "query-string";
+import path from "path";
 import fetch from "isomorphic-fetch";
 
 require("dotenv").config();
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const redirect_uri = process.env.REDIRECT_URI;
+// const client_id = process.env.SPOTIFY_CLIENT_ID;
+// const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+// const redirect_uri = process.env.REDIRECT_URI;
 const encoded_auth = process.env.ENCODED_AUTH;
 
 const PORT = 8080;
@@ -72,6 +73,11 @@ app.get("/authenticate", async (req, res) => {
   const { access_token } = resp;
 
   res.send(access_token);
+});
+
+app.use(express.static(path.join(__dirname, "build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build/index.html"));
 });
 
 app.listen(PORT, () => {
