@@ -60,23 +60,26 @@ app.use(cors({ origin: true }));
 //   }
 // });
 
-app.get("/authenticate", async (req, res) => {
-  let resp = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${encoded_auth}`,
-    },
-    body: "grant_type=client_credentials",
-  }).then((res) => res.json());
+app.get(
+  "/authenticate",
+  async (req: express.Request, res: express.Response) => {
+    let resp = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${encoded_auth}`,
+      },
+      body: "grant_type=client_credentials",
+    }).then((res) => res.json());
 
-  const { access_token } = resp;
+    const { access_token } = resp;
 
-  res.send(access_token);
-});
+    res.send(access_token);
+  }
+);
 
 app.use(express.static(path.join(__dirname, "../build")));
-app.get("*", (req, res) => {
+app.get("*", (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(__dirname, "../build/index.html"));
 });
 
