@@ -1,5 +1,7 @@
 In an attempt to keep the music I play of a certain caliber, I made this app to trick my friends into thinking that they were adding songs to my Spotify queue when in reality nothing is actually happening.
 
+The server which handles the Spotify API and authentication is written in TypeScript inside the `server/` directory.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -11,11 +13,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
